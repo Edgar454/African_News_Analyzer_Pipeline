@@ -1,20 +1,24 @@
 import os
 from dotenv import load_dotenv
-import mistralai
+from mistralai import Mistral
 
 import json
 from fastapi import HTTPException
 
-api_key = os.getenv("MISTRAL_API_KEY",)
+load_dotenv()
+
+api_key = os.getenv("MISTRAL_API_KEY")
 model = "open-mistral-nemo"
 
 client = Mistral(api_key=api_key)
 
-
+def relative_change(old: float, new: float) -> float:
+    if old == 0:
+        return 0.0
+    return abs(new - old) / old
 
 
 async def provide_weekly_summary(db_pool):
-    try:
         async with db_pool.acquire() as conn:
             # Weekly summary (text + topics)
             summary_row = await conn.fetchrow("""
@@ -100,14 +104,11 @@ Write a clean, readable summary of the week. Highlight:
 
         return response.choices[0].message.content
 
-    except Exception as e:
-        print(f"Error generating full weekly summary: {e}")
-        raise HTTPException(status_code=500, detail="Failed to provide weekly summary.")
+
 
 
 
 async def compare_two_weeks(db_pool):
-    try:
         async with db_pool.acquire() as conn:
             # Get last 2 network summaries
             net_rows = await conn.fetch("""
@@ -132,12 +133,20 @@ async def compare_two_weeks(db_pool):
         # Convert DB rows to usable Python dicts
         net1, net2 = [dict(r) for r in net_rows]
         node1, node2 = [dict(r) for r in node_rows]
+
+        net1["week_start"] = net1["week_start"].isoformat()
+        net2["week_start"] = net2["week_start"].isoformat()
+
         node1["metrics"] = json.loads(node1["metrics"])
         node2["metrics"] = json.loads(node2["metrics"])
 
+        # calculate aggregation metrics
+        number_change = relative_change(net1["num_nodes"], net2["num_nodes"])
+        density_change = relative_change(net1["clustering_coefficient"], net2["clustering_coefficient"])
+
         # Compose prompt
         prompt = f"""
-You are a network analyst. Compare the following two weekly network snapshots.
+You are a network analyst comparing two weekly network snapshots derived from news data.
 
 --- WEEK 1 ({net1['week_start']}) ---
 Network summary:
@@ -153,12 +162,19 @@ Network summary:
 Node-level metrics (PageRank, centrality, etc.):
 {json.dumps(node2["metrics"], indent=2)}
 
-Write a detailed analyst-style summary highlighting:
-- Changes in network structure (communities, density, paths)
-- Changes in node importance (PageRank, etc.)
-- New or disappearing key actors
-- Any other interesting patterns
+Please write a clear and engaging summary for a general audience interested in news trends. Your summary should:
+
+- Begin with an introduction explaining the purpose of the comparison and what the network represents (e.g., connections among news topics, sources, or actors).
+- Describe major changes in the network structure in simple terms, connecting these changes to possible shifts in news themes, topics, or collaborations.
+- Discuss key actors or entities that became more or less influential, relating their importance to real-world events or trends.
+- Highlight any emerging or disappearing news topics or groups, and what these might imply.
+- Avoid heavy technical jargon; if network terms are used, explain them briefly and clearly.
+- Conclude with insights on how these network changes reflect evolving news narratives or information flows.
+
+Keep the summary concise, informative, and accessible to readers without a technical background in network analysis.
 """
+
+
 
         # Call OpenAI
         response = client.chat.complete(
@@ -168,11 +184,9 @@ Write a detailed analyst-style summary highlighting:
                 {"role": "user", "content": prompt}
             ],
             temperature=0.5,
-            max_tokens=700
+            max_tokens=1500
         )
 
         summary = response.choices[0].message.content
 
-        return summary
-
-    
+        return summary , net2["num_nodes"], net2["clustering_coefficient"], number_change, density_change

@@ -5,10 +5,10 @@ import logging
 from dotenv import load_dotenv
 from pathlib import Path
 from fastapi import APIRouter, Request, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse,HTMLResponse
 from pydantic import BaseModel
-from typing import List, Dict, Any
-from route_utils import compare_two_weeks , provide_weekly_summary
+from typing import List, Dict, Any , Optional
+from routes.route_utils import compare_two_weeks , provide_weekly_summary
 
 # Setup
 load_dotenv()
@@ -29,19 +29,24 @@ class NewsItem(BaseModel):
     tags: List[str]
     category: str
 
+class Topic(BaseModel):
+    terms: List[str]
+    topic: str
+    weights: List[float]
+
 class Summary(BaseModel):
     id: int
     week_start: datetime.datetime
     week_end: datetime.datetime
     summary_text: str
-    topic_model: Dict[str, Any]
+    topic_model: List[Topic]
 
 class NetworkMetrics(BaseModel):
     id: int
     week_start: datetime.datetime
     num_nodes: int
     num_edges: int
-    avg_path_length: float
+    avg_path_length: Optional[float]
     clustering_coefficient: float
     num_communities: int
 
@@ -88,29 +93,26 @@ async def get_weekly_summary_db(request: Request):
         logger.error(f"Database error: {e}")
         raise HTTPException(status_code=500, detail="Failed to fetch the weekly summary.")
 
-@router.get("/get_weekly_summary_visualization/")
-async def get_weekly_summary_visualization():
-    try:
-        topic_viz_path = OUTPUT_PATH / "graphs" / "topics_visualization" / "lda_visualization.html"
-        knowledge_graph_path = OUTPUT_PATH / "graphs" / "knowledge_visualization" / "knowledge_graph.json"
+@router.get("/get_weekly_summary_visualization/topic_html")
+async def get_topic_html():
+    topic_viz_path = OUTPUT_PATH / "graphs" / "topics_visualization" / "lda_visualization.html"
+    if not topic_viz_path.exists():
+        raise HTTPException(status_code=404, detail="Topic visualization file not found.")
 
-        if not topic_viz_path.exists() or not knowledge_graph_path.exists():
-            raise HTTPException(status_code=404, detail="Visualization files not found.")
+    with open(topic_viz_path, "r", encoding="utf-8") as f:
+        html_content = f.read()
+    return HTMLResponse(content=html_content)
 
-        with open(topic_viz_path, "r", encoding="utf-8") as f:
-            topic_html = f.read()
+@router.get("/get_weekly_summary_visualization/knowledge_graph")
+async def get_knowledge_graph():
+    knowledge_graph_path = OUTPUT_PATH / "graphs" / "knowledge_visualization" / "knowledge_graph.json"
+    if not knowledge_graph_path.exists():
+        raise HTTPException(status_code=404, detail="Knowledge graph file not found.")
 
-        with open(knowledge_graph_path, "r", encoding="utf-8") as f:
-            knowledge_json = json.load(f)
+    with open(knowledge_graph_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
 
-        return {
-            "topic_model_html": topic_html,
-            "knowledge_graph": knowledge_json
-        }
-
-    except Exception as e:
-        logger.error(f"Visualization load error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to load visualization files.")
+    return JSONResponse(content=data)
 
 @router.get("/get_weekly_networks_metrics/", response_model=NetworkMetrics)
 async def get_weekly_networks_metrics(request: Request):
@@ -168,9 +170,9 @@ async def get_weekly_summary_insights(request: Request):
 async def compare_two_weeks_route(request: Request):
     try:
         db_pool = request.app.state.db_pool
-        summary  = await compare_two_weeks(db_pool)
+        summary , num_nodes, clustering_coefficient, number_change, density_change = await compare_two_weeks(db_pool)
 
-        return {"summary": summary}
+        return {"summary": summary, "num_nodes": num_nodes, "clustering_coefficient": clustering_coefficient, "number_change": number_change, "density_change": density_change}
 
     except Exception as e:
         logger.error(f"Error during comparison: {e}")
