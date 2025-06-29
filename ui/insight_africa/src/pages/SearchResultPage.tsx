@@ -1,10 +1,8 @@
 // pages/SearchResultsPage.tsx
-import React from 'react';
-
 import { useLocation } from 'react-router-dom';
 import { useNews } from '../utils/api';
-import Header from '../Components/Header/RegularHeader';
-import NewsCard from '../Components/NewsContent/ui/NewsCard';
+import Header from '../components/Header/RegularHeader';
+import NewsCard from '../components/NewsContent/ui/NewsCard';
 
 export default function SearchResultsPage() {
   const { data: news, isLoading, error } = useNews();

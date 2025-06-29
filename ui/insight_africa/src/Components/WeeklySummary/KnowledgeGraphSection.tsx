@@ -1,4 +1,3 @@
-import React from 'react'
 import { useKnowledgeGraphJSON } from '../../utils/api'
 import ForceGraph2D from 'react-force-graph-2d'
 

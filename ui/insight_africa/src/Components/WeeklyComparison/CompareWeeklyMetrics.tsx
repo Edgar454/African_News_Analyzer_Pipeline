@@ -1,5 +1,4 @@
 // components/WeeklyComparison/CompareWeeklyMetrics.tsx
-import React from 'react';
 
 interface CompareProps {
   num_nodes: number;

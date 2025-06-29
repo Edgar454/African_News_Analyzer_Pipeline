@@ -1,10 +1,16 @@
 import os
 import json
 import datetime
+from dotenv import load_dotenv
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 from utils.date_utils import get_week_range
 from utils.processing_utils import perform_summary, perform_topic_modeling 
+load_dotenv()
+
+POSTGRES_SERVER = os.environ.get("POSTGRES_SERVER", "172.27.176.1")
+POSTGRES_PORT = os.environ.get("POSTGRES_PORT", "5432")
+POSTGRES_DB = os.environ.get("POSTGRES_DB", "postgres")
 
 def run_summarization_and_topic_modeling():
     spark = SparkSession.builder \
@@ -12,7 +18,7 @@ def run_summarization_and_topic_modeling():
     .getOrCreate()
 
     # PostgreSQL connection parameters
-    jdbc_url = "jdbc:postgresql://172.27.176.1:5432/postgres?stringtype=unspecified"
+    jdbc_url = f"jdbc:postgresql://{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}?stringtype=unspecified"
     connection_properties = {
         "user": os.environ.get("POSTGRES_USER"),
         "password": os.environ.get("POSTGRES_PASSWORD"),

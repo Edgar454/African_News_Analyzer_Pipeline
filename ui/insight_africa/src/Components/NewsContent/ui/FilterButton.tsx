@@ -1,6 +1,18 @@
 import { useState } from 'react';
 
-export default function FilterButton({ label, options = [], onSelect, selected }) {
+interface FilterButtonProps {
+  label: string;
+  options?: string[];
+  selected: string | null;
+  onSelect: (value: string | null) => void;
+}
+
+export default function FilterButton({
+  label,
+  options = [],
+  selected,
+  onSelect,
+}: FilterButtonProps) {
   const [open, setOpen] = useState(false);
 
   const displayLabel = selected || label;

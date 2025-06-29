@@ -1,24 +1,21 @@
-import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import {
   useWeeklySummary,
-  useWeeklyTopicHTML,
   useNetworkMetrics,
   useNodeMetrics,
   useWeeklyInsights
 } from '../utils/api'
 
-import Header from '../Components/Header/RegularHeader'
-import InsightsSidebar from '../Components/WeeklySummary/InsightSidebar'
-import TopicModelTags from '../Components/WeeklySummary/TopicTags'
-import TopicModelGraph from '../Components/WeeklySummary/EmbeddedTopicHTML'
-import NetworkGraph from '../Components/WeeklySummary/KnowledgeGraphSection'
-import NetworkMetrics from '../Components/WeeklySummary/NetworkMetricsGrid'
-import NodeCentralityTable from '../Components/WeeklySummary/NodeCentralityTable'
+import Header from '../components/Header/RegularHeader'
+import InsightsSidebar from '../components/WeeklySummary/InsightSidebar'
+import TopicModelTags from '../components/WeeklySummary/TopicTags'
+import TopicModelGraph from '../components/WeeklySummary/EmbeddedTopicHTML'
+import NetworkGraph from '../components/WeeklySummary/KnowledgeGraphSection'
+import NetworkMetrics from '../components/WeeklySummary/NetworkMetricsGrid'
+import NodeCentralityTable from '../components/WeeklySummary/NodeCentralityTable'
 
 export default function WeeklySummaryPage() {
   const { data: summary, error: summaryError } = useWeeklySummary()
-  const topicHTML = useWeeklyTopicHTML()
   const { data: networkMetrics, error: networkError } = useNetworkMetrics()
   const { data: nodeMetrics, error: nodeError } = useNodeMetrics()
   const { data: weeklyInsights, error: insightsError } = useWeeklyInsights()
@@ -121,7 +118,7 @@ export default function WeeklySummaryPage() {
                 <h3 id="topic-modeling" className="text-[#131416] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">
                   Topic Model Visualization
                 </h3>
-                <TopicModelGraph htmlString={topicHTML} />
+                <TopicModelGraph />
 
                 {/* Topic Model Tags */}
                 <h3 className="text-[#131416] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">

@@ -1,6 +1,5 @@
-import React from 'react';
-import Header from '../Components/Header/RegularHeader';
-import CompareWeeklyMetrics from '../Components/WeeklyComparison/CompareWeeklyMetrics';
+import Header from '../components/Header/RegularHeader';
+import CompareWeeklyMetrics from '../components/WeeklyComparison/CompareWeeklyMetrics';
 import { useComparison } from '../utils/api';
 import ReactMarkdown from 'react-markdown';
 

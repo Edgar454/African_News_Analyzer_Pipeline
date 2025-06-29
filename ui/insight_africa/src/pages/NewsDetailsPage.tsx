@@ -1,6 +1,5 @@
-import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import Header from '../Components/Header/RegularHeader'
+import Header from '../components/Header/RegularHeader'
 import { useNews } from '../utils/api'
 
 const NewsDetailPage = () => {

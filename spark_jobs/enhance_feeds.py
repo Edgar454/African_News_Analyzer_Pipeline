@@ -4,10 +4,14 @@ from pyspark.sql.types import StructType, StringType , ArrayType
 from dotenv import load_dotenv
 import os
 
+print("Started the Enhancing script")
 load_dotenv()
 
 NEWS_TOPIC = os.getenv("KAFKA_NEWS_TOPIC", "news_topic")
-KAFKA_HOST = os.getenv("KAFKA_HOST", "localhost:9092")
+KAFKA_HOST = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092")
+POSTGRES_SERVER = os.environ.get("POSTGRES_SERVER", "172.27.176.1")
+POSTGRES_PORT = os.environ.get("POSTGRES_PORT", "5432")
+POSTGRES_DB = os.environ.get("POSTGRES_DB", "postgres")
 
 spark = SparkSession.builder \
     .appName("RSS Stream Processor") \
@@ -18,6 +22,7 @@ df = spark.readStream \
     .option("kafka.bootstrap.servers", KAFKA_HOST) \
     .option("subscribe", NEWS_TOPIC) \
     .option("failOnDataLoss", "false") \
+    .option("kafka.security.protocol", "PLAINTEXT") \
     .load()
 
 df_parsed = df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
@@ -60,7 +65,7 @@ def escape_quotes_in_string_columns(df):
 df_escaped = escape_quotes_in_string_columns(df_json)
 
 # PostgreSQL connection parameters
-jdbc_url = "jdbc:postgresql://172.27.176.1:5432/postgres?stringtype=unspecified"
+jdbc_url = f"jdbc:postgresql://{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}?stringtype=unspecified"
 connection_properties = {
         "user": os.environ.get("POSTGRES_USER"),
         "password": os.environ.get("POSTGRES_PASSWORD"),

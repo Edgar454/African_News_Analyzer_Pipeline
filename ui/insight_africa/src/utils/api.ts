@@ -1,7 +1,7 @@
 // utils/api.ts
 import useSWR from 'swr'
 
-const API_BASE = import.meta.env.VITE_PUBLIC_API_URL || 'http://localhost:8000';
+const API_BASE = '/api';
 
 
 const fetcher = (url: string) => fetch(url).then(res => {
@@ -19,6 +19,7 @@ export interface NewsItem {
   published_date: string
   tags: string[]
   category: string
+  source: string
 }
 
 export interface Topic {
@@ -46,9 +47,14 @@ export interface NetworkMetrics {
 }
 
 export interface NodeMetrics {
-  id: number
-  week_start: string
-  metrics: Record<string, any>
+  id: number;
+  week_start: string;
+  metrics: {
+    degree_centrality: [string, number][];
+    betweenness_centrality: [string, number][];
+    closeness_centrality: [string, number][];
+    page_rank: [string, number][];
+  };
 }
 
 export interface Comparison {

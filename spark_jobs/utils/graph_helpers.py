@@ -192,10 +192,7 @@ def write_graph_to_json(G: nx.Graph, path: str) -> None:
         json.dump(data, f)
 
 def get_top_n(centrality_dict, n=5):
-    return sorted(centrality_dict.items(), key=lambda x: x[1], reverse=True)[:n]
-    
-def get_top_node_names(centrality_dict, n=5):
-    return sorted(centrality_dict.items(), key=lambda x: x[0], reverse=True)[:n]
+    return sorted(centrality_dict.items(), key=lambda x: x[1], reverse=True)[:n]   
 
 def compute_graph_metrics(G: nx.Graph, top_n: int = 5) -> dict:
     """
@@ -238,7 +235,6 @@ def compute_graph_metrics(G: nx.Graph, top_n: int = 5) -> dict:
             "average_path_length": avg_path_length
         },
         "top_nodes": {
-            "nodes": get_top_node_names(degree_centrality, top_n),
             "degree_centrality": get_top_n(degree_centrality, top_n),
             "betweenness_centrality": get_top_n(betweenness_centrality, top_n),
             "closeness_centrality": get_top_n(closeness_centrality, top_n),

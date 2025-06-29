@@ -1,10 +1,10 @@
 // pages/NewsPage.tsx
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNews } from '../utils/api'
-import Header from '../Components/Header/RegularHeader'
-import NewsFilters from '../Components/NewsContent/NewsFilters'
-import NewsCard from '../Components/NewsContent/ui/NewsCard'
-import Pagination from '../Components/NewsContent/Pagination'
+import Header from '../components/Header/RegularHeader'
+import NewsFilters from '../components/NewsContent/NewsFilters'
+import NewsCard from '../components/NewsContent/ui/NewsCard'
+import Pagination from '../components/NewsContent/Pagination'
 
 export default function NewsPage() {
   const { data: news, error, isLoading } = useNews()

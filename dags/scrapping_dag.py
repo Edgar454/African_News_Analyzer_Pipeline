@@ -46,6 +46,7 @@ with DAG(
                         tags TEXT[],
                         category VARCHAR(50),
                         author VARCHAR(100),
+                        source VARCHAR(100),
                         UNIQUE (title, published_date)
                     );
                 """,

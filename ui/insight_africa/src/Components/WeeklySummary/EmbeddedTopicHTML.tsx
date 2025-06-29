@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import  { useEffect, useRef } from 'react'
 
 export default function TopicModelGraph() {
   const iframeRef = useRef<HTMLIFrameElement>(null)
@@ -7,7 +7,7 @@ export default function TopicModelGraph() {
     const fetchHTML = async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/get_weekly_summary_visualization/topic_html`
+          `/api/get_weekly_summary_visualization/topic_html`
         )
         const html = await res.text()
 

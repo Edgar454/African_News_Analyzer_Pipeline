@@ -6,7 +6,7 @@ import os
 from datetime import  timedelta
 from pendulum import datetime
 
-airflow_home = os.getenv("AIRFLOW_HOME", "/opt/bitnami/airflow")
+spark_home = os.getenv("SPARK_JOBS_PARENT_FOLDER", "/opt/bitnami/airflow")
 
 
 # Create the DAG
@@ -38,8 +38,8 @@ with DAG("Classification_dag",
         
             run_classification = SparkSubmitOperator(
                 task_id="DataTransformation",
-                application= airflow_home + "/spark_jobs/run_classification.py",
-                jars=airflow_home + "/spark_jobs/jars/postgresql-42.2.5.jar",
+                application= spark_home + "/spark_jobs/run_classification.py",
+                jars=spark_home + "/spark_jobs/jars/postgresql-42.2.5.jar",
                 conn_id="spark_default",
             )
 

@@ -1,52 +1,81 @@
 import os
+import logging
+from dotenv import load_dotenv
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
+import psycopg2
 from utils.processing_utils import perform_classification
 
-def run_classification():
-    spark = SparkSession.builder \
-    .appName("Classification Job") \
-    .getOrCreate()
+load_dotenv()
 
-    # PostgreSQL connection parameters
-    jdbc_url = "jdbc:postgresql://172.27.176.1:5432/postgres?stringtype=unspecified"
+# Configure logging with timestamp
+logging.basicConfig(
+    level=logging.INFO,
+    format='[%(asctime)s] %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+logger = logging.getLogger(__name__)
+
+POSTGRES_SERVER = os.environ.get("POSTGRES_SERVER", "172.27.176.1")
+POSTGRES_PORT = os.environ.get("POSTGRES_PORT", "5432")
+POSTGRES_DB = os.environ.get("POSTGRES_DB", "postgres")
+POSTGRES_USER = os.environ.get("POSTGRES_USER")
+POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
+
+def run_classification():
+    spark = SparkSession.builder.appName("Classification Job").getOrCreate()
+
+    jdbc_url = f"jdbc:postgresql://{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}?stringtype=unspecified"
     connection_properties = {
-        "user": os.environ.get("POSTGRES_USER"),
-        "password": os.environ.get("POSTGRES_PASSWORD"),
+        "user": POSTGRES_USER,
+        "password": POSTGRES_PASSWORD,
         "driver": "org.postgresql.Driver"
     }
 
-    # Step 1: Read Spark DataFrame from Postgres
     df = spark.read.format("jdbc").options(
         url=jdbc_url,
         dbtable="news",
         **connection_properties
     ).load()
 
-    #filter out the already classified entries
-    df = df.filter(col("category").isNull())
+    df = df.filter(col("category").isNull()).select("id", "description")
 
-    if not df.isEmpty():
+    if df.rdd.isEmpty():
+        logger.info("Nothing to classify")
+        return
 
-        # Step 2: Convert to Pandas
-        pandas_df = df.toPandas()
+    pandas_df = df.toPandas()
+    classified_df = perform_classification(pandas_df)  # adds 'category'
 
-        # Step 3: Classify in batches (LLM API)
-        classified_df = perform_classification(pandas_df)  # returns the same df with "category"
+    classified_spark_df = spark.createDataFrame(classified_df).select("id", "category")
 
-        # Step 4: Convert back to Spark
-        df = spark.createDataFrame(classified_df)
+    staging_table = "news_staging"
+    classified_spark_df.write.format("jdbc").options(
+        url=jdbc_url,
+        dbtable=staging_table,
+        **connection_properties
+    ).mode("overwrite").save()
 
-        # Step 5: Write back to Postgres
-        df.write.format("jdbc").options(
-            url=jdbc_url,
-            dbtable="news",
-            **connection_properties
-        ).mode("overwrite").save()
-    
-    else:
-        print("Nothing to classify")
+    conn = psycopg2.connect(
+        host=POSTGRES_SERVER,
+        port=POSTGRES_PORT,
+        dbname=POSTGRES_DB,
+        user=POSTGRES_USER,
+        password=POSTGRES_PASSWORD
+    )
+    with conn.cursor() as cur:
+        cur.execute("""
+            UPDATE news AS n
+            SET category = s.category
+            FROM news_staging AS s
+            WHERE n.id = s.id
+        """)
+        conn.commit()
+    conn.close()
+
+    logger.info("Classification update done.")
 
 if __name__ == "__main__":
     run_classification()
-    print("Classification executed successfuly")
+    logger.info("Classification executed successfully")
+

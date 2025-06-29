@@ -1,13 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { NodeMetrics } from '../../utils/api'
 
-interface NodeMetrics {
-  id: number;
-  week_start: string;
-  metrics: {
-    page_rank: [string, number][];
-    betweenness_centrality: [string, number][];
-  };
-}
 
 interface NodeData {
   node: string;

@@ -1,5 +1,7 @@
-confluent-kafka
 feedparser
+pendulum
+confluent-kafka
+python-dotenv
 mistralai
 pyspark
 pandas
@@ -14,3 +16,5 @@ networkx
 tqdm
 pendulum
 scikit-learn
+pyLDAvis
+psycopg2-binary

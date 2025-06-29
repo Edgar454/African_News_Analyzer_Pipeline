@@ -6,7 +6,7 @@ import os
 from datetime import  timedelta
 from pendulum import datetime
 
-airflow_home = os.getenv("AIRFLOW_HOME", "/opt/bitnami/airflow")
+spark_home = os.getenv("SPARK_JOBS_PARENT_FOLDER", "/opt/bitnami/airflow")
 
 
 # Create the DAG
@@ -71,15 +71,15 @@ with DAG("weekly_summary_dag",
 
             run_summarization_and_topic = SparkSubmitOperator(
                 task_id="run_summarization",
-                application= airflow_home + "/spark_jobs/run_summarization_and_topic.py",
-                jars=airflow_home + "/spark_jobs/jars/postgresql-42.2.5.jar",
+                application= spark_home + "/spark_jobs/run_summarization_and_topic.py",
+                jars=spark_home + "/spark_jobs/jars/postgresql-42.2.5.jar",
                 conn_id="spark_default",
             )
 
             build_graph_task = SparkSubmitOperator(
                 task_id="build_kg",
-                application= airflow_home + "/spark_jobs/build_KG.py",
-                jars=airflow_home + "/spark_jobs/jars/postgresql-42.2.5.jar",
+                application= spark_home + "/spark_jobs/build_KG.py",
+                jars=spark_home + "/spark_jobs/jars/postgresql-42.2.5.jar",
                 conn_id="spark_default",
             )
         

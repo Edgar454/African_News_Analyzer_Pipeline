@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface NetworkMetricsProps {
   metrics: {
     num_nodes: number;

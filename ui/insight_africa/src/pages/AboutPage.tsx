@@ -1,5 +1,5 @@
-import Header from '../Components/Header/RegularHeader'
-import AboutContent from '../Components/AboutPage/AboutContent'
+import Header from '../components/Header/RegularHeader'
+import AboutContent from '../components/AboutPage/AboutContent'
 
 export default function About() {
   return (

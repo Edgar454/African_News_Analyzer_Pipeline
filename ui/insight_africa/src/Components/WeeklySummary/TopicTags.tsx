@@ -1,5 +1,4 @@
-import React from 'react'
-import {type  Topic } from '../../utils/api'
+import type { Topic } from '../../utils/api'
 
 interface TopicModelTagsProps {
   topics: Topic[]

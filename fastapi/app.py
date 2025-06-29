@@ -7,7 +7,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+POSTGRES_SERVER = os.environ.get("POSTGRES_SERVER", "172.27.176.1")
+POSTGRES_PORT = os.environ.get("POSTGRES_PORT", "5432")
+POSTGRES_DB = os.environ.get("POSTGRES_DB", "postgres")
+POSTGRES_USER = os.environ.get("POSTGRES_USER", "postgres")
+POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD", "postgres")
+
+DATABASE_URL = f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
 
 async def lifespan(app: FastAPI):
     """

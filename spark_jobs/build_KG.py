@@ -1,10 +1,19 @@
 import os
 import datetime
+from dotenv import load_dotenv
 from utils.processing_utils import build_and_save_knowledge_graph
 from utils.date_utils import get_week_range
 from utils.spark_utils import save_network_metrics_spark , save_node_metrics_spark
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
+
+print("Saving to:", os.path.abspath(os.getenv("OUTPUT_DIR", "data/graphs")))
+
+load_dotenv()
+
+POSTGRES_SERVER = os.environ.get("POSTGRES_SERVER", "172.27.176.1")
+POSTGRES_PORT = os.environ.get("POSTGRES_PORT", "5432")
+POSTGRES_DB = os.environ.get("POSTGRES_DB", "postgres")
 
 
 def run_build_knowledge_graph():
@@ -13,7 +22,7 @@ def run_build_knowledge_graph():
     .getOrCreate()
 
     # PostgreSQL connection parameters
-    jdbc_url = "jdbc:postgresql://172.27.176.1:5432/postgres?stringtype=unspecified"
+    jdbc_url = f"jdbc:postgresql://{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}?stringtype=unspecified"
     connection_properties = {
         "user": os.environ.get("POSTGRES_USER"),
         "password": os.environ.get("POSTGRES_PASSWORD"),

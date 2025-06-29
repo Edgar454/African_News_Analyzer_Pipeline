@@ -1,4 +1,5 @@
 // components/Layout/InsightsSidebar.tsx
+import React from 'react';
 import { FaListUl, FaProjectDiagram, FaShareAlt, FaHashtag } from 'react-icons/fa';
 
 interface NavItem {
