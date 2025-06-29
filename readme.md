@@ -43,7 +43,7 @@ Insight Africa consists of **three core systems** working together:
 
 ## 🧱 Architecture
 
-![Architecture Diagram](./assets/architecture-diagram.png)
+![Architecture Diagram](./assets/architecture_diagram.png)
 
 ---
 
