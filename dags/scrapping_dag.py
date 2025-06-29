@@ -10,6 +10,7 @@ from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 from airflow.utils.trigger_rule import TriggerRule
 from datetime import datetime, timedelta
 from kafka_producer.ingest_feed import ingest_feed
+from feeds_config import FEED_URLS
 
 default_args = {
     'owner': 'airflow',
@@ -18,10 +19,6 @@ default_args = {
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
 }
-
-urls = ['https://feeds.feedburner.com/AfricaIntelligence',
-        'https://africapresse.com/feed/',]
-
 
 
 with DAG(
@@ -56,7 +53,7 @@ with DAG(
             task_id='scrape_task',
             python_callable=ingest_feed,
             op_kwargs={
-                'urls': urls
+                'urls': FEED_URLS,  
             },
 
         )
