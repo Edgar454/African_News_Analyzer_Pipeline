@@ -1,0 +1,68 @@
+{"timestamp":"2026-04-19T01:29:35.779546Z","level":"info","event":"NumExpr defaulting to 4 threads.","logger":"numexpr.utils","filename":"utils.py","lineno":164}
+{"timestamp":"2026-04-19T01:29:36.217974Z","level":"info","event":"DAG bundles loaded: dags-folder, example_dags","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager","filename":"manager.py","lineno":179}
+{"timestamp":"2026-04-19T01:29:36.218989Z","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/scrapping_dag.py","logger":"airflow.models.dagbag.DagBag","filename":"dagbag.py","lineno":593}
+{"timestamp":"2026-04-19T01:29:36.316512Z","level":"warning","event":"The `airflow.operators.python.PythonOperator` attribute is deprecated. Please use `'airflow.providers.standard.operators.python.PythonOperator'`.","category":"DeprecatedImportWarning","filename":"/opt/airflow/dags/scrapping_dag.py","lineno":7,"logger":"py.warnings"}
+{"timestamp":"2026-04-19T01:29:36.316708Z","level":"warning","event":"The `airflow.operators.trigger_dagrun.TriggerDagRunOperator` attribute is deprecated. Please use `'airflow.providers.standard.operators.trigger_dagrun.TriggerDagRunOperator'`.","category":"DeprecatedImportWarning","filename":"/opt/airflow/dags/scrapping_dag.py","lineno":9,"logger":"py.warnings"}
+{"timestamp":"2026-04-19T01:29:36.316798Z","level":"warning","event":"The `airflow.utils.trigger_rule.TriggerRule` attribute is deprecated. Please use `'airflow.task.trigger_rule.TriggerRule'`.","category":"DeprecatedImportWarning","filename":"/opt/airflow/dags/scrapping_dag.py","lineno":10,"logger":"py.warnings"}
+{"timestamp":"2026-04-19T01:29:36.356759Z","level":"info","event":"Task instance is in running state","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:36.357022Z","level":"info","event":" Previous state of the Task instance: TaskInstanceState.QUEUED","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:36.357288Z","level":"info","event":"Current task name:scrape_task","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:36.357415Z","level":"info","event":"Dag name:scraping_dag","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:36.533483Z","level":"info","event":"Found 11 entries in the feed: https://feeds.feedburner.com/AfricaIntelligence","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.360392Z","level":"info","event":"Found 10 entries in the feed: https://africapresse.com/feed/","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.604310Z","level":"info","event":"Found 30 entries in the feed: https://www.france24.com/en/business-tech/rss","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.606818Z","level":"info","event":"Producing message for feed ID: 38114e66-b540-46ca-9edd-2774ab50e2f6","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.611511Z","level":"info","event":"Producing message for feed ID: 61dd76c6-b8a6-465e-aa85-df236bc551e2","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.612726Z","level":"info","event":"Producing message for feed ID: bfca34f3-84ef-4deb-a97d-5727c5ab65bc","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.612972Z","level":"info","event":"Producing message for feed ID: 77bc910e-2193-4a95-9762-9c2f5f4d085f","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.621619Z","level":"info","event":"Producing message for feed ID: bee77053-4f89-4e9e-91cc-fe4fcd5cc3ed","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.632117Z","level":"info","event":"Producing message for feed ID: 4f128a44-2b05-4468-921f-b27cf0a89fa4","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.632487Z","level":"info","event":"Producing message for feed ID: 3f332759-aed0-4d89-b7cb-4982845cac2b","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.632627Z","level":"info","event":"Producing message for feed ID: a60bf22b-71db-4685-b000-df51a1b8ec39","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.632726Z","level":"info","event":"Producing message for feed ID: 40bd89d4-d500-45e3-8803-a8e4604454e6","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.632833Z","level":"info","event":"Producing message for feed ID: d04cff51-065c-4cf9-8f3d-75c57cb41052","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.632946Z","level":"info","event":"Producing message for feed ID: 8ac5ce04-5edf-4c9e-827d-474f686a4f0c","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.633029Z","level":"info","event":"Producing message for feed ID: 55ea122f-eb90-4543-a6e5-e97d91a017a3","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.633128Z","level":"info","event":"Producing message for feed ID: 3e9a57b7-c219-415d-8f80-7809bd8f5fbd","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.633228Z","level":"info","event":"Producing message for feed ID: e6fd7fb5-3bb2-4fed-b403-e217575c8e77","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.633326Z","level":"info","event":"Producing message for feed ID: 8556ddcf-503c-4de6-a77c-26689c6a94f4","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.633412Z","level":"info","event":"Producing message for feed ID: 81c0b093-7995-49a5-8da5-da9c47dec620","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.633501Z","level":"info","event":"Producing message for feed ID: 2945e829-7c8b-4379-8951-76894a531508","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.633608Z","level":"info","event":"Producing message for feed ID: 6b457800-6e5b-4c02-8a9a-3ea2ec0a755b","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.633704Z","level":"info","event":"Producing message for feed ID: ff5be697-eeb4-442a-94ec-848205c94fe6","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.633797Z","level":"info","event":"Producing message for feed ID: 04fa6763-1643-4943-b4b2-61870f779225","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.633890Z","level":"info","event":"Producing message for feed ID: 2d080a6d-badf-49ea-9971-039e90e95af6","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.633978Z","level":"info","event":"Producing message for feed ID: 673742f4-9746-47fc-aa25-26e772fad3e6","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.634068Z","level":"info","event":"Producing message for feed ID: 26b83d1b-01c7-4b0a-84f1-a7a08d373263","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.634163Z","level":"info","event":"Producing message for feed ID: e136b291-1ce1-4ca4-981e-2a124e5feb42","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.634251Z","level":"info","event":"Producing message for feed ID: fb9fd3f9-c170-4129-9cbb-151256cd1169","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.634331Z","level":"info","event":"Producing message for feed ID: 8c1a2b0d-3506-4281-8819-92b40557e1f2","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.634420Z","level":"info","event":"Producing message for feed ID: d36e6838-29b9-43aa-bf67-e2997f882905","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.634551Z","level":"info","event":"Producing message for feed ID: 86ef20d8-1987-471c-867e-4c06e3d34a64","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.634650Z","level":"info","event":"Producing message for feed ID: 8c709114-c471-49cd-9e10-454161b0648c","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.634749Z","level":"info","event":"Producing message for feed ID: 9f0cbe78-494c-488f-9df6-dc7859cfb79a","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.634850Z","level":"info","event":"Producing message for feed ID: 5ce45e53-70ce-414c-b6de-e793699b440f","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.634940Z","level":"info","event":"Producing message for feed ID: 7eaa7564-8f1c-4ad6-abb7-ddd205b4df59","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.635037Z","level":"info","event":"Producing message for feed ID: d9d42dbe-ff26-44f5-a16d-cf97b496a548","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.635122Z","level":"info","event":"Producing message for feed ID: 522791cf-0f3c-44d9-bb86-14303e00846f","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.635580Z","level":"info","event":"Producing message for feed ID: 22d5fe2f-0ebe-494f-b3bc-f4fc13a25c31","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.635715Z","level":"info","event":"Producing message for feed ID: ad1ee0be-b863-48c9-aa08-66505dcbf6bb","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.635831Z","level":"info","event":"Producing message for feed ID: be832ee7-3bfb-40f0-a989-cc0238aac016","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.635936Z","level":"info","event":"Producing message for feed ID: 265e7a1e-93e3-4758-b765-caa39f528abc","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.636039Z","level":"info","event":"Producing message for feed ID: 269929ca-9cb8-4c46-bef6-a03eedd833f3","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.636144Z","level":"info","event":"Producing message for feed ID: f87fcfce-5273-44d0-88a9-8f684941d79a","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.636245Z","level":"info","event":"Producing message for feed ID: 1302e938-ec6e-4f40-94f2-1602e6217e70","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.636335Z","level":"info","event":"Producing message for feed ID: 28415a5f-56e9-4555-b9f8-953374b77209","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.636439Z","level":"info","event":"Producing message for feed ID: a0bfd446-aea8-4641-a5f4-12d3308db8cb","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.636549Z","level":"info","event":"Producing message for feed ID: d8aa8862-3338-46de-afc4-cd8430151a56","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.636666Z","level":"info","event":"Producing message for feed ID: ca5adafb-0948-4440-904f-359eccf936ab","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.636777Z","level":"info","event":"Producing message for feed ID: 4a40b55a-5b31-49c0-9e26-e85584f61689","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.636876Z","level":"info","event":"Producing message for feed ID: 7f352745-fa27-4b32-b354-b43ac5d581ea","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.636983Z","level":"info","event":"Producing message for feed ID: c6f9c166-a3b6-4cf3-978b-17e746f08077","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.639472Z","level":"info","event":"Producing message for feed ID: 6c556d66-d389-43f9-9989-a65b3c57a13f","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.639672Z","level":"info","event":"Producing message for feed ID: 9ccb22f5-437c-41cb-9037-57b514f0fa5f","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.639781Z","level":"info","event":"Producing message for feed ID: a127bb34-929b-4e10-8b2b-c2ec9134282a","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.640617Z","level":"info","event":"Done. Returned value was: None","logger":"airflow.task.operators.airflow.providers.standard.operators.python.PythonOperator","filename":"python.py","lineno":218}
+{"timestamp":"2026-04-19T01:29:37.665267Z","level":"info","event":"Task instance in success state","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.665501Z","level":"info","event":" Previous state of the Task instance: TaskInstanceState.RUNNING","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:29:37.666181Z","level":"info","event":"Task operator:<Task(PythonOperator): scrape_task>","logger":"task.stdout"}

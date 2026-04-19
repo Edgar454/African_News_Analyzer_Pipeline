@@ -27,7 +27,7 @@ class NewsItem(BaseModel):
     content: str
     published_date: datetime.datetime
     tags: List[str]
-    category: str
+    category: Optional[str]
 
 class Topic(BaseModel):
     terms: List[str]

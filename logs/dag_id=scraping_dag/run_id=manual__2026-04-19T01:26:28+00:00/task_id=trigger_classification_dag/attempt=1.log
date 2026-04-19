@@ -1,0 +1,15 @@
+{"timestamp":"2026-04-19T01:26:41.904151Z","level":"info","event":"NumExpr defaulting to 4 threads.","logger":"numexpr.utils","filename":"utils.py","lineno":164}
+{"timestamp":"2026-04-19T01:26:42.680478Z","level":"info","event":"DAG bundles loaded: dags-folder, example_dags","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager","filename":"manager.py","lineno":179}
+{"timestamp":"2026-04-19T01:26:42.681983Z","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/scrapping_dag.py","logger":"airflow.models.dagbag.DagBag","filename":"dagbag.py","lineno":593}
+{"timestamp":"2026-04-19T01:26:42.780376Z","level":"warning","event":"The `airflow.operators.python.PythonOperator` attribute is deprecated. Please use `'airflow.providers.standard.operators.python.PythonOperator'`.","category":"DeprecatedImportWarning","filename":"/opt/airflow/dags/scrapping_dag.py","lineno":7,"logger":"py.warnings"}
+{"timestamp":"2026-04-19T01:26:42.781488Z","level":"warning","event":"The `airflow.operators.trigger_dagrun.TriggerDagRunOperator` attribute is deprecated. Please use `'airflow.providers.standard.operators.trigger_dagrun.TriggerDagRunOperator'`.","category":"DeprecatedImportWarning","filename":"/opt/airflow/dags/scrapping_dag.py","lineno":9,"logger":"py.warnings"}
+{"timestamp":"2026-04-19T01:26:42.782002Z","level":"warning","event":"The `airflow.utils.trigger_rule.TriggerRule` attribute is deprecated. Please use `'airflow.task.trigger_rule.TriggerRule'`.","category":"DeprecatedImportWarning","filename":"/opt/airflow/dags/scrapping_dag.py","lineno":10,"logger":"py.warnings"}
+{"timestamp":"2026-04-19T01:26:42.822069Z","level":"info","event":"Task instance is in running state","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:26:42.822441Z","level":"info","event":" Previous state of the Task instance: TaskInstanceState.QUEUED","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:26:42.822708Z","level":"info","event":"Current task name:trigger_classification_dag","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:26:42.822900Z","level":"info","event":"Dag name:scraping_dag","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:26:42.823118Z","level":"info","event":"Triggering Dag Run.","trigger_dag_id":"Classification_dag","logger":"task","filename":"task_runner.py","lineno":1052}
+{"timestamp":"2026-04-19T01:26:42.888829Z","level":"info","event":"Dag Run triggered successfully.","trigger_dag_id":"Classification_dag","logger":"task","filename":"task_runner.py","lineno":1086}
+{"timestamp":"2026-04-19T01:26:43.025230Z","level":"info","event":"Task instance in success state","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:26:43.025618Z","level":"info","event":" Previous state of the Task instance: TaskInstanceState.RUNNING","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:26:43.026370Z","level":"info","event":"Task operator:<Task(TriggerDagRunOperator): trigger_classification_dag>","logger":"task.stdout"}

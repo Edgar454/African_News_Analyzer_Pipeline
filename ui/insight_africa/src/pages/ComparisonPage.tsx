@@ -1,4 +1,4 @@
-import Header from '../components/Header/RegularHeader';
+import Header from '../components/Header/HomepageHeader';
 import CompareWeeklyMetrics from '../components/WeeklyComparison/CompareWeeklyMetrics';
 import { useComparison } from '../utils/api';
 import ReactMarkdown from 'react-markdown';

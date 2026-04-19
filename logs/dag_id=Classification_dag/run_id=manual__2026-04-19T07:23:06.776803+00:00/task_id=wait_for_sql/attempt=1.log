@@ -1,0 +1,14 @@
+{"timestamp":"2026-04-19T07:23:07.505843Z","level":"info","event":"NumExpr defaulting to 4 threads.","logger":"numexpr.utils","filename":"utils.py","lineno":164}
+{"timestamp":"2026-04-19T07:23:08.121299Z","level":"info","event":"DAG bundles loaded: dags-folder, example_dags","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager","filename":"manager.py","lineno":179}
+{"timestamp":"2026-04-19T07:23:08.123264Z","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/classification_dag.py","logger":"airflow.models.dagbag.DagBag","filename":"dagbag.py","lineno":593}
+{"timestamp":"2026-04-19T07:23:08.247188Z","level":"info","event":"Task instance is in running state","logger":"task.stdout"}
+{"timestamp":"2026-04-19T07:23:08.247557Z","level":"info","event":" Previous state of the Task instance: TaskInstanceState.QUEUED","logger":"task.stdout"}
+{"timestamp":"2026-04-19T07:23:08.248296Z","level":"info","event":"Current task name:wait_for_sql","logger":"task.stdout"}
+{"timestamp":"2026-04-19T07:23:08.248587Z","level":"info","event":"Dag name:Classification_dag","logger":"task.stdout"}
+{"timestamp":"2026-04-19T07:23:08.300032Z","level":"info","event":"Poking: SELECT COUNT(*) FROM news WHERE category IS NULL; (with parameters None)","logger":"airflow.task.operators.airflow.providers.common.sql.sensors.sql.SqlSensor","filename":"sql.py","lineno":101}
+{"timestamp":"2026-04-19T07:23:08.323601Z","level":"info","event":"Running statement: SELECT COUNT(*) FROM news WHERE category IS NULL;, parameters: None","logger":"airflow.task.hooks.airflow.providers.postgres.hooks.postgres.PostgresHook","filename":"sql.py","lineno":810}
+{"timestamp":"2026-04-19T07:23:08.327307Z","level":"info","event":"Rows affected: 1","logger":"airflow.task.hooks.airflow.providers.postgres.hooks.postgres.PostgresHook","filename":"sql.py","lineno":822}
+{"timestamp":"2026-04-19T07:23:08.331888Z","level":"info","event":"Success criteria met. Exiting.","logger":"airflow.task.operators.airflow.providers.common.sql.sensors.sql.SqlSensor","filename":"sensor.py","lineno":250}
+{"timestamp":"2026-04-19T07:23:08.370924Z","level":"info","event":"Task instance in success state","logger":"task.stdout"}
+{"timestamp":"2026-04-19T07:23:08.371712Z","level":"info","event":" Previous state of the Task instance: TaskInstanceState.RUNNING","logger":"task.stdout"}
+{"timestamp":"2026-04-19T07:23:08.372816Z","level":"info","event":"Task operator:<Task(SqlSensor): wait_for_sql>","logger":"task.stdout"}

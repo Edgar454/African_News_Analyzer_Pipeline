@@ -2,14 +2,14 @@ feedparser
 pendulum
 confluent-kafka
 python-dotenv
-mistralai
+mistralai==1.8.2
 pyspark
 pandas
 numpy
 seaborn
 spacy
-langchain
-langchain_community
+langchain==0.3.26
+langchain_community==0.3.26
 langdetect
 nltk
 networkx

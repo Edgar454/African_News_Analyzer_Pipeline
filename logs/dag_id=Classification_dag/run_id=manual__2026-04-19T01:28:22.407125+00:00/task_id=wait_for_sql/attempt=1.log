@@ -1,0 +1,15 @@
+{"timestamp":"2026-04-19T01:28:23.421522Z","level":"info","event":"NumExpr defaulting to 4 threads.","logger":"numexpr.utils","filename":"utils.py","lineno":164}
+{"timestamp":"2026-04-19T01:28:23.901947Z","level":"info","event":"DAG bundles loaded: dags-folder, example_dags","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager","filename":"manager.py","lineno":179}
+{"timestamp":"2026-04-19T01:28:23.903736Z","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/classification_dag.py","logger":"airflow.models.dagbag.DagBag","filename":"dagbag.py","lineno":593}
+{"timestamp":"2026-04-19T01:28:23.967366Z","level":"info","event":"Task instance is in running state","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:28:23.967687Z","level":"info","event":" Previous state of the Task instance: TaskInstanceState.QUEUED","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:28:23.967978Z","level":"info","event":"Current task name:wait_for_sql","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:28:23.968110Z","level":"info","event":"Dag name:Classification_dag","logger":"task.stdout"}
+{"timestamp":"2026-04-19T01:28:23.990146Z","level":"info","event":"Poking: SELECT COUNT(*) FROM news WHERE category IS NULL; (with parameters None)","logger":"airflow.task.operators.airflow.providers.common.sql.sensors.sql.SqlSensor","filename":"sql.py","lineno":101}
+{"timestamp":"2026-04-19T01:28:24.014268Z","level":"info","event":"Running statement: SELECT COUNT(*) FROM news WHERE category IS NULL;, parameters: None","logger":"airflow.task.hooks.airflow.providers.postgres.hooks.postgres.PostgresHook","filename":"sql.py","lineno":810}
+{"timestamp":"2026-04-19T01:28:24.017500Z","level":"info","event":"Rows affected: 1","logger":"airflow.task.hooks.airflow.providers.postgres.hooks.postgres.PostgresHook","filename":"sql.py","lineno":822}
+{"timestamp":"2026-04-19T01:28:54.068761Z","level":"info","event":"Poking: SELECT COUNT(*) FROM news WHERE category IS NULL; (with parameters None)","logger":"airflow.task.operators.airflow.providers.common.sql.sensors.sql.SqlSensor","filename":"sql.py","lineno":101}
+{"timestamp":"2026-04-19T01:28:54.092247Z","level":"info","event":"Running statement: SELECT COUNT(*) FROM news WHERE category IS NULL;, parameters: None","logger":"airflow.task.hooks.airflow.providers.postgres.hooks.postgres.PostgresHook","filename":"sql.py","lineno":810}
+{"timestamp":"2026-04-19T01:28:54.094321Z","level":"info","event":"Rows affected: 1","logger":"airflow.task.hooks.airflow.providers.postgres.hooks.postgres.PostgresHook","filename":"sql.py","lineno":822}
+{"timestamp":"2026-04-19T01:28:59.118740Z","level":"error","event":"Server indicated the task shouldn't be running anymore. Terminating process","detail":{"detail":{"reason":"not_running","message":"TI is no longer in the running state and task should terminate","current_state":"success"}},"logger":"task"}
+{"timestamp":"2026-04-19T01:29:04.143819Z","level":"error","event":"Task killed!","logger":"task"}
